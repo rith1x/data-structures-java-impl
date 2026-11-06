@@ -1,14 +1,14 @@
 
-public class LinkedList {
+public class LinkedList<T> {
     class Node {
-        int val;
+        T val;
         Node next = null;
 
-        Node(int val) {
+        Node(T val) {
             this.val = val;
         }
 
-        Node(int val, Node next) {
+        Node(T val, Node next) {
             this.val = val;
             this.next = next;
         }
@@ -16,7 +16,7 @@ public class LinkedList {
 
     Node head = null;
 
-    void insertAtBeginning(int val) {
+    void insertAtBeginning(T val) {
         Node nn = new Node(val);
         if (head == null) {
             head = nn;
@@ -26,7 +26,7 @@ public class LinkedList {
         }
     }
 
-    void insertAtEnd(int val) {
+    void insertAtEnd(T val) {
         Node nn = new Node(val);
         if (head == null) {
             this.head = nn;
@@ -39,7 +39,7 @@ public class LinkedList {
         }
     }
 
-    void insertAtIndex(int index, int val) {
+    void insertAtIndex(int index, T val) {
         Node temp = this.head;
         for (int i = 0; i < index; i++) {
             temp = temp.next;
@@ -48,38 +48,38 @@ public class LinkedList {
         temp.next = nn;
     }
 
-    void insertAtPosition(int pos, int val) {
+    void insertAtPosition(int pos, T val) {
         this.insertAtIndex(pos - 1, val);
     }
 
-    int deleteAtBeginning() {
-        int deleted = this.head.val;
+    T deleteAtBeginning() {
+        T deleted = this.head.val;
         this.head = this.head.next;
         return deleted;
     }
 
-    int deleteAtEnd() {
+    T deleteAtEnd() {
         Node temp = this.head;
         while (temp.next.next != null)
             temp = temp.next;
-        int deleted = temp.next.val;
+        T deleted = temp.next.val;
         temp.next = null;
         return deleted;
     }
 
     // 1 2 3 4 5 - 2
     // ^
-    int deleteAtIndex(int index) {
+    T deleteAtIndex(int index) {
         Node temp = this.head;
         for (int i = 0; i < index - 1; i++) {
             temp = temp.next;
         }
-        int deleted = temp.next.val;
+        T deleted = temp.next.val;
         temp.next = temp.next.next;
         return deleted;
     }
 
-    int deleteAtPosition(int position) {
+    T deleteAtPosition(int position) {
         return this.deleteAtIndex(position - 1);
     }
 
@@ -106,7 +106,7 @@ public class LinkedList {
         return count;
     }
 
-    int search(int val) {
+    int search(T val) {
         Node temp = this.head;
         int index = 0;
         while (temp != null) {
@@ -118,7 +118,7 @@ public class LinkedList {
         return -1;
     }
 
-    int getMiddle() {
+    T getMiddle() {
         Node slow = this.head;
         Node fast = this.head;
         while (fast.next.next != null) {
@@ -128,7 +128,7 @@ public class LinkedList {
         return slow.val;
     }
 
-    int getNthNode(int n) {
+    T getNthNode(int n) {
         Node temp = this.head;
         for (int i = 0; i < n; i++) {
             temp = temp.next;
@@ -136,10 +136,10 @@ public class LinkedList {
         return temp.val;
     }
 
-    int deleteByValue(int val) {
+    T deleteByValue(T val) {
         int index = search(val);
         if (index == -1)
-            return -1;
+            return null;
         return deleteAtIndex(index);
     }
 

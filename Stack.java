@@ -3,30 +3,30 @@ public class Stack {
 
 }
 
-class StackUsingArray extends ArrayList {
-    int pop() {
+class StackUsingArray<T> extends ArrayList<T> {
+    T pop() {
         return super.deleteAtEnd();
     }
 
-    void push(int val) {
+    void push(T val) {
         super.insertAtEnd(val);
     }
 
-    int peek() {
-        return super.get(super.top - 1);
+    T peek() {
+        return super.get(super.size - 1);
     }
 }
 
-class StackUsingList extends LinkedList {
-    void push(int val) {
+class StackUsingList<T> extends LinkedList<T> {
+    void push(T val) {
         super.insertAtBeginning(val);
     }
 
-    int pop() {
+    T pop() {
         return super.deleteAtBeginning();
     }
 
-    int peek() {
+    T peek() {
         return super.getNthNode(1);
     }
 

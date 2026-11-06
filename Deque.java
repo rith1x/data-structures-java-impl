@@ -2,88 +2,88 @@ public class Deque {
 
 }
 
-class DequeUsingArray extends ArrayList {
+class DequeUsingArray<T> extends ArrayList<T> {
 
-    void offerFirst(int val) {
+    void offerFirst(T val) {
         super.insertAtBeginning(val);
     }
 
-    void offerLast(int val) {
+    void offerLast(T val) {
         super.insertAtEnd(val);
     }
 
-    int pollFirst() {
+    T pollFirst() {
         return super.deleteAtBeginning();
     }
 
-    int pollLast() {
+    T pollLast() {
         return super.deleteAtEnd();
     }
 
-    int peekFirst() {
+    T peekFirst() {
         return super.get(0);
     }
 
-    int peekLast() {
-        return super.get(super.top - 1);
+    T peekLast() {
+        return super.get(super.size - 1);
     }
 
-    void push(int val) {
+    void push(T val) {
         this.offerFirst(val);
     }
 
-    int pop() {
+    T pop() {
         return this.pollFirst();
     }
 
-    void enqueue(int val) {
+    void enqueue(T val) {
         this.offerFirst(val);
     }
 
-    int dequeue() {
+    T dequeue() {
         return this.pollLast();
     }
 
 }
 
-class DequeUsingList extends LinkedList {
-    void offerFirst(int val) {
+class DequeUsingList<T> extends LinkedList<T> {
+    void offerFirst(T val) {
         super.insertAtBeginning(val);
     }
 
-    void offerLast(int val) {
+    void offerLast(T val) {
         super.insertAtEnd(val);
     }
 
-    int pollFirst() {
+    T pollFirst() {
         return super.deleteAtBeginning();
     }
 
-    int pollLast() {
+    T pollLast() {
         return super.deleteAtEnd();
     }
 
-    int peekFirst() {
+    T peekFirst() {
         return super.head.val;
     }
 
-    int peekLast() {
+    T peekLast() {
         return super.getNthNode(super.size());
     }
 
-    void push(int val) {
+    void push(T val) {
         this.offerFirst(val);
     }
 
-    int pop() {
+    T pop() {
         return this.pollFirst();
     }
 
-    void enqueue(int val) {
+    void enqueue(T val) {
         this.offerFirst(val);
     }
 
-    int dequeue() {
+    T dequeue() {
         return this.pollLast();
     }
 }

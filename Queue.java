@@ -2,46 +2,46 @@ public class Queue {
 
 }
 
-class QueueUsingArray extends ArrayList {
-    int dequeue() {
+class QueueUsingArray<T> extends ArrayList<T> {
+    T dequeue() {
         return super.deleteAtBeginning();
     }
 
-    void enqueue(int val) {
+    void enqueue(T val) {
         super.insertAtEnd(val);
     }
 
-    int peek() {
-        return super.get(super.top - 1);
+    T peek() {
+        return super.get(super.size - 1);
     }
 
-    void offer(int val) {
+    void offer(T val) {
         this.enqueue(val);
     }
 
-    int poll() {
+    T poll() {
         return this.dequeue();
     }
 }
 
-class QueueUsingList extends LinkedList {
-    void enqueue(int val) {
+class QueueUsingList<T> extends LinkedList<T> {
+    void enqueue(T val) {
         super.insertAtEnd(val);
     }
 
-    int dequeue() {
+    T dequeue() {
         return super.deleteAtBeginning();
     }
 
-    int peek() {
+    T peek() {
         return super.getNthNode(1);
     }
 
-    int poll() {
+    T poll() {
         return this.dequeue();
     }
 
-    void offer(int val) {
+    void offer(T val) {
         this.enqueue(val);
     }
 

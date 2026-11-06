@@ -6,22 +6,23 @@ import java.util.Arrays;
  * @since 2026
  *        Dynamic array implementation
  */
-public class ArrayList {
-    int[] arr;
+public class ArrayList<T> {
+    T[] arr;
     int capacity = 5;
-    int top = 0;
+    int size = 0;
 
+    @SuppressWarnings("unchecked")
     ArrayList() {
-        this.arr = new int[capacity];
+        this.arr = (T[]) new Object[capacity];
     }
 
     /*
      * Give index, get value
      */
-    int get(int index) {
+    T get(int index) {
         if (index < 0 || index >= capacity) {
             System.out.println("Invalid index");
-            return -1;
+            return null;
         }
         return arr[index];
     }
@@ -32,105 +33,108 @@ public class ArrayList {
      * @param element user given element
      * @return nothing
      */
-    void add(int element) {
-        if (top == capacity) {
+    @SuppressWarnings("unchecked")
+    void add(T element) {
+        if (size == capacity) {
             capacity *= 2;
-            int[] temp = new int[capacity];
-            for (int i = 0; i < top; i++) {
+            T[] temp = (T[]) new Object[capacity];
+            for (int i = 0; i < size; i++) {
                 temp[i] = arr[i];
             }
             arr = temp;
         }
-        arr[top] = element;
-        top++;
+        arr[size] = element;
+        size++;
     }
 
-    void add(int index, int value) {
+    void add(int index, T value) {
         this.arr[index] = value;
     }
 
-    int deleteAtEnd() {
-        if (top == 0) {
+    T deleteAtEnd() {
+        if (size == 0) {
             System.out.println("Array Empty");
-            return -1;
+            return null;
         }
-        int deleted = arr[top - 1];
-        top--;
+        T deleted = arr[size - 1];
+        size--;
         return deleted;
     }
     // 1,2,3,4,5
 
-    int deleteAtBeginning() {
-        int deleted = arr[0];
-        for (int i = 0; i < top; i++) {
+    T deleteAtBeginning() {
+        T deleted = arr[0];
+        for (int i = 0; i < size; i++) {
             arr[i] = arr[i + 1];
         }
-        top--;
+        size--;
         return deleted;
     }
 
     // 1 2 3 4 5
-    int deleteAtIndex(int index) {
+    T deleteAtIndex(int index) {
         if (index < 0 || index >= capacity) {
             System.out.println("Invalid index");
-            return -1;
+            return null;
         }
-        int deleted = arr[index];
-        for (int i = index; i < top; i++) {
+        T deleted = arr[index];
+        for (int i = index; i < size; i++) {
             arr[i] = arr[i + 1];
         }
-        top--;
+        size--;
         return deleted;
     }
 
-    int deleteAtPosition(int pos) {
+    T deleteAtPosition(int pos) {
         return deleteAtIndex(pos - 1);
     }
 
-    void insertAtEnd(int val) {
+    void insertAtEnd(T val) {
         add(val);
     }
 
-    void insertAtIndex(int index, int val) {
+    void insertAtIndex(int index, T val) {
         add(index, val);
     }
 
-    void insertAtPosition(int pos, int val) {
+    void insertAtPosition(int pos, T val) {
         add(pos - 1, val);
     }
 
-    void insertAtBeginning(int val) {
-        if (top == capacity) {
+    @SuppressWarnings("unchecked")
+    void insertAtBeginning(T val) {
+        if (size == capacity) {
             capacity *= 2;
-            int temp[] = new int[capacity];
-            for (int i = 0; i < top; i++) {
+            T temp[] = (T[]) new Object[capacity];
+            for (int i = 0; i < size; i++) {
                 temp[i] = arr[i];
             }
             arr = temp;
         }
-        for (int i = top; i > 0; i--) {
+        for (int i = size; i > 0; i--) {
             arr[i] = arr[i - 1];
         }
         arr[0] = val;
-        top++;
+        size++;
     }
 
-    void insertAtBeginRecursive(int element) {
-        helper(top, element);
+    void insertAtBeginRecursive(T element) {
+        helper(size, element);
     }
 
-    void helper(int ind, int el) {
-        if (top == capacity) {
+    @SuppressWarnings("unchecked")
+    void helper(int ind, T el) {
+        if (size == capacity) {
             capacity *= 2;
-            int temp[] = new int[capacity];
-            for (int i = 0; i < top; i++) {
+            T temp[] = (T[]) new Object[capacity];
+            for (int i = 0; i < size; i++) {
                 temp[i] = arr[i];
             }
             arr = temp;
         }
         if (ind == 0) {
             arr[0] = el;
-            top++;
+            size++;
             return;
         }
         arr[ind] = arr[ind - 1];
@@ -141,19 +145,4 @@ public class ArrayList {
         System.out.println(Arrays.toString(arr));
     }
 
-}
-
-class Driver {
-    public static void main(String[] args) {
-        ArrayList al = new ArrayList();
-        al.add(1);
-        al.add(2);
-        al.add(3);
-        al.add(4);
-        al.print();
-        al.insertAtBeginRecursive(5);
-        al.print();
-        al.insertAtBeginRecursive(6);
-        al.print();
-    }
 }
